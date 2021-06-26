@@ -16,7 +16,7 @@ namespace BookProject.Controllers
 		}
 
 		[HttpPost("add-book")]
-		public IActionResult AddBook([FromBody] BookDTO bookDto)
+		public IActionResult AddBook([FromBody] BookDto bookDto)
 		{
 			_bookService.AddBook(bookDto);
 
@@ -40,7 +40,7 @@ namespace BookProject.Controllers
 		}
 
 		[HttpPut("update-book/{id}")]
-		public IActionResult UpdateBookById(int id, [FromBody] BookDTO bookDto)
+		public IActionResult UpdateBookById(int id, [FromBody] BookDto bookDto)
 		{
 			var book = _bookService.UpdateBookById(id, bookDto);
 

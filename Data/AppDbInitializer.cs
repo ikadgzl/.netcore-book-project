@@ -19,7 +19,6 @@ namespace BookProject.Data
 					context.Books.AddRange(
 						new Book()
 						{
-							Author = "Ilker",
 							Description = "Ilker's book",
 							Genre = "Horror",
 							Rate = 6,
@@ -31,7 +30,6 @@ namespace BookProject.Data
 						},
 						new Book()
 						{
-							Author = "Zehra",
 							Description = "Zehra's book",
 							Genre = "Fiction",
 							Rate = 5,

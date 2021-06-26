@@ -10,8 +10,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace BookProject.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20210623022232_InitialDbMigration")]
-    partial class InitialDbMigration
+    [Migration("20210626100439_PublisherRelationsAdded")]
+    partial class PublisherRelationsAdded
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -49,6 +49,9 @@ namespace BookProject.Migrations
                     b.Property<bool>("IsRead")
                         .HasColumnType("boolean");
 
+                    b.Property<int>("PublisherId")
+                        .HasColumnType("integer");
+
                     b.Property<int?>("Rate")
                         .HasColumnType("integer");
 
@@ -57,7 +60,40 @@ namespace BookProject.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("PublisherId");
+
                     b.ToTable("Books");
+                });
+
+            modelBuilder.Entity("BookProject.Data.Model.Publisher", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<string>("Name")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Publisher");
+                });
+
+            modelBuilder.Entity("BookProject.Data.Model.Book", b =>
+                {
+                    b.HasOne("BookProject.Data.Model.Publisher", "Publisher")
+                        .WithMany("Books")
+                        .HasForeignKey("PublisherId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Publisher");
+                });
+
+            modelBuilder.Entity("BookProject.Data.Model.Publisher", b =>
+                {
+                    b.Navigation("Books");
                 });
 #pragma warning restore 612, 618
         }

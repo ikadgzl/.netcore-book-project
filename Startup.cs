@@ -36,6 +36,8 @@ namespace BookProject
 			
 			// Configure services
 			services.AddTransient<BookService>();
+			services.AddTransient<PublisherService>();
+			services.AddTransient<AuthorService>();
 
 
 				services.AddControllers();
@@ -60,7 +62,7 @@ namespace BookProject
 
 			app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
 			
-			AppDbInitializer.Seed(app);
+			// AppDbInitializer.Seed(app);
 		}
 	}
 }
